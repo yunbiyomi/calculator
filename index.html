@@ -12,9 +12,22 @@
 
     <article>
 
+        <!-- 표시창 -->
+        <input type="text" id="resultView" disabled>
+
         <!-- 숫자 입력 -->
-        <input id="num1" type="number" placeholder="숫자 1">
-        <input id="num2" type="number" placeholder="숫자 2">
+        <div>
+            <button onclick="clickNum(0)">0</button>
+            <button onclick="clickNum(1)">1</button>
+            <button onclick="clickNum(2)">2</button>
+            <button onclick="clickNum(3)">3</button>
+            <button onclick="clickNum(4)">4</button>
+            <button onclick="clickNum(5)">5</button>
+            <button onclick="clickNum(6)">6</button>
+            <button onclick="clickNum(7)">7</button>
+            <button onclick="clickNum(8)">8</button>
+            <button onclick="clickNum(9)">9</button>
+        </div>
 
         <!-- 연산 -->
         <div>
@@ -24,49 +37,52 @@
             <button onclick="clickOp('/')">/</button>
         </div>
 
-        <!-- 결과 -->
-        <input id="output" type="number" placeholder="결과">
+        <!-- 합계, 초기화 -->
+        <button onclick="cal()">=</button>
+        <button onclick="clearView()">AC</button>
     </article>
 
     <script>
+        let num1=0, op;
 
-        function add(a, b){
-            return a+b
+        function clickNum(a) {
+            resultView.value += a;
         }
 
-        function sub(a, b){
-            return a-b
+        function clickOp(a){
+            const num = document.getElementById("resultView").value;
+            num1 = num;
+            op = a;
+            return document.getElementById("resultView").value='';
         }
-
-        function mul(a, b){
-            return a*b
-        }
-
-        function div(a, b){
-            return a/b
-        }
-
-        function clickOp(op){
-            const num1 = Number(document.getElementById("num1").value)
-            const num2 = Number(document.getElementById("num2").value)
+        
+        function cal() {
+            const num2 = document.getElementById("resultView").value;
 
             let result;
+
             if(op=='+'){
-                result = add(num1, num2)
+                result = Number(num1) + Number(num2);
+                document.getElementById("resultView").value = result;
             }
 
             else if(op=='-'){
-                result = sub(num1, num2)
+                result = Number(num1) - Number(num2);
+                document.getElementById("resultView").value = result;
             }
             
             else if(op=='*'){
-                result = mul(num1, num2)
+                result = Number(num1) * Number(num2);
+                document.getElementById("resultView").value = result;
             }
             else if(op=='/'){
-                result = div(num1, num2)
+                result = Number(num1) / Number(num2);
+                document.getElementById("resultView").value = result;
             }
-            
-            document.getElementById("output").value = result;
+        }
+
+        function clearView(){
+            document.getElementById("resultView").value='';
         }
 
     </script>
